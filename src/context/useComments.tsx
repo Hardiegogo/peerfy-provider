@@ -1,11 +1,16 @@
-import { ReactNode, createContext, useContext, useState } from "react";
-
-interface IComment {
-  content: string;
-}
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { fetchComments } from "../services/comment-services/fetchComments";
+import CommentCreator from "../components/CommentCreator";
+import { IComment } from "./types";
 
 interface MyContextProps {
-  comments: IComment[];
+  comments: IComment[] | undefined;
   setComments: React.Dispatch<React.SetStateAction<IComment[] | undefined>>;
 }
 
@@ -15,16 +20,45 @@ export const useComments = () => {
   return useContext(CommentsContext);
 };
 
-// comments= [
-//     []
-// ]
-
 export const CommentsProvider = ({ children }: { children: ReactNode }) => {
-  const [comments, setComments] = useState<IComment[]>();
+  const [comments, setComments] = useState<IComment[] | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetchComments();
+      setComments(res.data as IComment[]);
+    })();
+  }, []);
+
+  const RenderComments: React.FC = () => {
+    return (
+      <div>
+        <ul>
+          {comments?.map((comment) => (
+            <div
+              key={comment._id}
+              style={{
+                position: "absolute",
+                left: comment.locationX,
+                top: comment.locationY,
+                backgroundColor: "#3498db", // You can use the color constant here
+                padding: "8px",
+                color: "#ffffff", // Text color
+              }}
+            >
+              <p>{comment.content}</p>
+            </div>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <CommentsContext.Provider value={{ comments, setComments }}>
       {children}
+      <RenderComments />
+      <CommentCreator />
     </CommentsContext.Provider>
   );
 };
