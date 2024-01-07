@@ -8,6 +8,7 @@ import {
 import { fetchComments } from "../services/comment-services/fetchComments";
 import CommentCreator from "../components/CommentCreator";
 import { IComment } from "./types";
+import useSocketForComments from "../hooks/useSocketForComments";
 
 interface MyContextProps {
   comments: IComment[] | undefined;
@@ -22,6 +23,8 @@ export const useComments = () => {
 
 export const CommentsProvider = ({ children }: { children: ReactNode }) => {
   const [comments, setComments] = useState<IComment[] | undefined>();
+  const [latestActivityFromSocket, setLatestActivityFromSocket] = useState();
+  const [socket] = useSocketForComments(setLatestActivityFromSocket);
 
   useEffect(() => {
     (async () => {
@@ -29,6 +32,14 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
       setComments(res.data as IComment[]);
     })();
   }, []);
+
+  useEffect(() => {
+    if (latestActivityFromSocket) {
+      setComments((comments) => {
+        return [...comments as IComment[], latestActivityFromSocket];
+      });
+    }
+  }, [latestActivityFromSocket]);
 
   const RenderComments: React.FC = () => {
     return (
