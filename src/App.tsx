@@ -1,12 +1,11 @@
 import "./App.css";
-
-// export default CommentCreator;
+import CommentCreator from "./components/CommentCreator";
 
 function App() {
   return (
     <>
       GG
-      {/* <CommentCreator /> */}
+      <CommentCreator />
     </>
   );
 }
