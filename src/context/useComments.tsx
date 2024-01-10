@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { fetchComments } from "../services/comment-services/fetchComments";
-import CommentCreator from "../components/CommentCreator";
+import CommentCreator from "../components/CommentCreator/CommentCreator";
 import { IComment } from "./types";
 import useSocketForComments from "../hooks/useSocketForComments";
 

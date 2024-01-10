@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { postComment } from "../services/comment-services/postComment";
-import ContextMenu from "./ContextMenu/ContextMenu";
+import { postComment } from "../../services/comment-services/postComment";
+import ContextMenu from "../ContextMenu/ContextMenu";
+import "./commentCreator.css";
 
 const CommentCreator = () => {
   const [isInputVisible, setInputVisible] = useState(false);
@@ -45,30 +46,34 @@ const CommentCreator = () => {
 
   return (
     <div
-      onClick={() => {}}
+      onClick={() => {
+        hideContextMenu();
+      }}
       onContextMenu={handlePageClick}
       style={{ height: "100vh", width: "100vw", cursor: "pointer" }}
     >
       {isInputVisible && (
         <div
-          style={{
-            position: "absolute",
-            left: `${coordinates.x}px`,
-            top: `${coordinates.y}px`,
-            backgroundColor: "#fff",
-            padding: "8px",
-            border: "1px solid #ccc",
-            borderRadius: "1px",
-          }}
+          className="popup-container"
+          style={{ left: `${coordinates.x}px`, top: `${coordinates.y}px` }}
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
           <input
+            className="comment-input"
             value={commentContent}
             onChange={(e) => setCommentContent(e.target.value)}
+            placeholder="Type your comment here..."
           />
-          <button onClick={handleCommentCreate}>Post Comment</button>
+          <br />
+          <button
+            className="post-comment-btn"
+            onClick={handleCommentCreate}
+            disabled={commentContent === ""}
+          >
+            Post Comment
+          </button>
         </div>
       )}
       <ContextMenu

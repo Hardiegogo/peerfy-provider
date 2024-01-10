@@ -13,6 +13,9 @@ const ContextMenu = ({ show, x, y, handleContextMenuOption }: IContextMenu) => {
       <div onClick={() => handleContextMenuOption("Add Comment")}>
         Add Comment
       </div>
+      <div onClick={() => handleContextMenuOption("Add Screenshot")}>
+        Add Screenshot
+      </div>
       <div onClick={() => handleContextMenuOption("Add Voice Note")}>
         Add Voice Note
       </div>
