@@ -16,16 +16,11 @@ const CommentsProviderWrapper = ({
 };
 
 function App() {
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   return (
     <>
       Hello Dostonnn!
-      <ToggleButton isChecked={isChecked} setIsChecked={setIsChecked} />
-      {/* Wrap App contents with CommentsProviderWrapper */}
-      <CommentsProviderWrapper isEnabled={isChecked}>
-        {isChecked && <CommentCreator />}
-      </CommentsProviderWrapper>
     </>
   );
 }

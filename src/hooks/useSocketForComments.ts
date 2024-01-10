@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useSocket from "./useSocket";
 
 const useSocketForComments = (setLatestActivityFromSocket: any) => {
-  const [socket] = useSocket("http://localhost:3000/");
+  const [socket] = useSocket("https://peerfy-backend.onrender.com/");
   useEffect(() => {
     defineEvents();
   }, []);
