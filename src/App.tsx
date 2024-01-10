@@ -24,7 +24,7 @@ function App() {
       <ToggleButton isChecked={isChecked} setIsChecked={setIsChecked} />
       {/* Wrap App contents with CommentsProviderWrapper */}
       <CommentsProviderWrapper isEnabled={isChecked}>
-        {isChecked && <CommentCreator />}
+        <CommentCreator />
       </CommentsProviderWrapper>
     </>
   );
