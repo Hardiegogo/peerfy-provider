@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { postComment } from "../services/comment-services/postComment";
-import ContextMenu from "./ContextMenu";
+import ContextMenu from "./ContextMenu/ContextMenu";
 
 const CommentCreator = () => {
   const [isInputVisible, setInputVisible] = useState(false);
@@ -45,6 +45,7 @@ const CommentCreator = () => {
 
   return (
     <div
+      onClick={() => {}}
       onContextMenu={handlePageClick}
       style={{ height: "100vh", width: "100vw", cursor: "pointer" }}
     >
@@ -68,14 +69,14 @@ const CommentCreator = () => {
             onChange={(e) => setCommentContent(e.target.value)}
           />
           <button onClick={handleCommentCreate}>Post Comment</button>
-          <ContextMenu
-            show={contextMenu.show}
-            x={contextMenu.x}
-            y={contextMenu.y}
-            handleContextMenuOption={handleContextMenuOption}
-          />
         </div>
       )}
+      <ContextMenu
+        show={contextMenu.show}
+        x={contextMenu.x}
+        y={contextMenu.y}
+        handleContextMenuOption={handleContextMenuOption}
+      />
     </div>
   );
 };

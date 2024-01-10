@@ -1,3 +1,5 @@
+import "./contextMenu.css";
+
 interface IContextMenu {
   show: boolean;
   x: number;
@@ -15,7 +17,7 @@ const ContextMenu = ({ show, x, y, handleContextMenuOption }: IContextMenu) => {
         Add Voice Note
       </div>
       <div onClick={() => handleContextMenuOption("Add Issue Ticket")}>
-        Add Issue Ticket
+        Create Ticket
       </div>
     </div>
   ) : null;
