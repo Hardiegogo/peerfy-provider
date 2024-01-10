@@ -1,0 +1,36 @@
+/* styles.css */
+.popup-container {
+  position: absolute;
+  background-color: #2d2d2d; /* Dark gray background */
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  margin-top: 12px; /* Increased margin for better separation */
+}
+
+.comment-input {
+  margin-bottom: 12px; /* Increased margin for better spacing */
+  padding: 12px;
+  border: 1px solid #555; /* Darker border color */
+  border-radius: 6px;
+  width: 90%;
+  color: black; /* Adjust text color */
+  background-color: white; /* Adjust background color */
+  font-size: 14px; /* Slightly increased font size */
+}
+
+.post-comment-btn {
+  padding: 6px; /* Increased padding */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add smooth transition */
+}
+
+.post-comment-btn:hover {
+  background-color: #0056b3;
+}

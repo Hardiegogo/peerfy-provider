@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { fetchComments } from "../services/comment-services/fetchComments";
-import CommentCreator from "../components/CommentCreator";
+import CommentCreator from "../components/CommentCreator/CommentCreator";
 import { IComment } from "./types";
 import useSocketForComments from "../hooks/useSocketForComments";
 
@@ -36,7 +36,7 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (latestActivityFromSocket) {
       setComments((comments) => {
-        return [...comments as IComment[], latestActivityFromSocket];
+        return [...(comments as IComment[]), latestActivityFromSocket];
       });
     }
   }, [latestActivityFromSocket]);
@@ -52,7 +52,7 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
                 position: "absolute",
                 left: comment.locationX,
                 top: comment.locationY,
-                backgroundColor: "#3498db", // You can use the color constant here
+                backgroundColor: "#3498db",
                 padding: "8px",
                 color: "#ffffff", // Text color
               }}
