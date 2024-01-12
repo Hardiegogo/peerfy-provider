@@ -122,8 +122,8 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CommentsContext.Provider value={{ comments, setComments }}>
-      {children}
       <ToggleButton isChecked={isChecked} setIsChecked={setIsChecked} />
+      {children}
       <CommentCreator />
       {isChecked && (
         <>
