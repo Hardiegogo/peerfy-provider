@@ -9,7 +9,7 @@ interface IContextMenu {
 
 const ContextMenu = ({ show, x, y, handleContextMenuOption }: IContextMenu) => {
   return show ? (
-    <div className="context-menu" style={{ top: y, left: x }}>
+    <div className="context-menu " style={{ top: y, left: x }}>
       <div onClick={() => handleContextMenuOption("Add Comment")}>
         Add Comment
       </div>

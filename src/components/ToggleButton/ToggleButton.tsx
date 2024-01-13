@@ -9,15 +9,25 @@ const ToggleButton = ({
   isChecked,
   setIsChecked,
 }: IToggleProps): JSX.Element => {
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
-
   return (
-    <label className={`switch ${isChecked ? "checked" : ""}`}>
-      <input type="checkbox" checked={isChecked} onChange={handleToggle} />
-      <span className="slider"></span>
-    </label>
+    <div className=" w-fit rounded-lg overflow-hidden absolute right-4 top-[40%] text-white ">
+      <div
+        onClick={() => setIsChecked(true)}
+        className={`bg-black cursor-pointer p-2  hover:bg-opacity-80 text-sm ${
+          isChecked ? "bg-opacity-80" : ""
+        }`}
+      >
+        On
+      </div>
+      <div
+        onClick={() => setIsChecked(false)}
+        className={`bg-black cursor-pointer p-2  hover:bg-opacity-80 text-sm ${
+          !isChecked ? "bg-opacity-80" : ""
+        }`}
+      >
+        Off
+      </div>
+    </div>
   );
 };
 

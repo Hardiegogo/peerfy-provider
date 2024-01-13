@@ -1,5 +1,7 @@
 .switch {
-  position: relative;
+  position: fixed;
+  right: 10px;
+  top: 50%;
   display: inline-block;
   width: 60px;
   height: 34px;
