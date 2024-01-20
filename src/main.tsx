@@ -6,7 +6,7 @@ import { CommentsProvider } from "./context/useComments.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CommentsProvider>
+    <CommentsProvider apiKey={import.meta.env.VITE_REACT_APP_API_KEY}>
       <App />
     </CommentsProvider>
   </React.StrictMode>

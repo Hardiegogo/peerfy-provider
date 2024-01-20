@@ -38,9 +38,9 @@ const Comment = ({ comment }) => {
         position: "absolute",
         left: comment.locationX,
         top: comment.locationY,
-        width: "40px", // Adjust the initial width as needed
-        height: "40px", // Adjust the initial height as needed
-        borderRadius: "50%", // Make it a circle
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
         backgroundColor: "black",
         display: "flex",
         justifyContent: "center",
@@ -53,7 +53,7 @@ const Comment = ({ comment }) => {
       // onMouseLeave={(e) => handleMouseLeave(e)}
     >
       <div className={`text-white text-[12px] ${isOpen ? "block" : "hidden"}`}>
-        <p className="absolute top-2 left-2">Member</p>
+        <p className="absolute top-2 left-2">Rahul</p>
         <p style={{ fontSize: "12px" }}>{comment.content}</p>
       </div>
       <p className={`text-white ${!isOpen ? "block" : "hidden"}`}>A</p>
@@ -64,6 +64,7 @@ const Comment = ({ comment }) => {
 interface MyContextProps {
   comments: IComment[] | undefined;
   setComments: React.Dispatch<React.SetStateAction<IComment[] | undefined>>;
+  apiKey: string;
 }
 
 export const CommentsContext = createContext<MyContextProps | null>(null);
@@ -72,7 +73,13 @@ export const useComments = () => {
   return useContext(CommentsContext);
 };
 
-export const CommentsProvider = ({ children }: { children: ReactNode }) => {
+export const CommentsProvider = ({
+  children,
+  apiKey,
+}: {
+  children: ReactNode;
+  apiKey: string;
+}) => {
   const [comments, setComments] = useState<IComment[] | undefined>();
   const [latestActivityFromSocket, setLatestActivityFromSocket] = useState();
   const [socket] = useSocketForComments(setLatestActivityFromSocket);
@@ -80,12 +87,14 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
 
   const [hoveredCommentId, setHoveredCommentId] = useState<string | null>(null);
 
+  const page = window.location.href;
+
   useEffect(() => {
     (async () => {
-      const res = await fetchComments();
+      const res = await fetchComments(apiKey, page);
       setComments(res.data as IComment[]);
     })();
-  }, []);
+  }, [apiKey, window.location.href]);
 
   useEffect(() => {
     if (latestActivityFromSocket) {
@@ -97,7 +106,7 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
 
   const RenderComments: React.FC = () => {
     return (
-      <div>
+      <div className="z-10">
         <ul>
           {comments?.map((comment) => (
             <Comment comment={comment} key={comment._id} />
@@ -108,15 +117,15 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CommentsContext.Provider value={{ comments, setComments }}>
+    <CommentsContext.Provider value={{ comments, setComments, apiKey }}>
       <ToggleButton isChecked={isChecked} setIsChecked={setIsChecked} />
-      {children}
-      <CommentCreator />
       {isChecked && (
         <>
+          <CommentCreator />
           <RenderComments />
         </>
       )}
+      {children}
     </CommentsContext.Provider>
   );
 };

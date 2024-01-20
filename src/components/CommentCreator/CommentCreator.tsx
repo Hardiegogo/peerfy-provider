@@ -2,8 +2,10 @@ import { useState } from "react";
 import { postComment } from "../../services/comment-services/postComment";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import "./commentCreator.css";
+import { useComments } from "../../context/useComments";
 
 const CommentCreator = () => {
+  const { apiKey } = useComments();
   const [isInputVisible, setInputVisible] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
@@ -20,6 +22,7 @@ const CommentCreator = () => {
 
   const handlePageClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    console.log("shivank", e);
     setCoordinates({ x: e.pageX, y: e.pageY });
     showContextMenu(e.pageX, e.pageY);
     console.log("click");
@@ -37,7 +40,9 @@ const CommentCreator = () => {
       commentContent,
       `${coordinates.x}px`,
       `${coordinates.y}px`,
-      "User123"
+      "User123",
+      apiKey,
+      window.location.href
     );
     console.log(commentContent);
     setCommentContent("");
@@ -47,10 +52,18 @@ const CommentCreator = () => {
   return (
     <div
       onClick={() => {
+        console.log("shivank");
         hideContextMenu();
       }}
+      className="absolute w-full h-full"
       onContextMenu={handlePageClick}
-      style={{ height: "100vh", width: "100vw", cursor: "pointer" }}
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        cursor: "pointer",
+        zIndex: 9,
+      }}
     >
       {isInputVisible && (
         <div
