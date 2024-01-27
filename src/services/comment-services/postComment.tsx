@@ -8,7 +8,7 @@ export const postComment = async (
   apiKey: string,
   pageUrl: string
 ) => {
-  const headers = { apiKey, pageUrl };
+  const headers = { apiKey };
 
   const res = await axios.post(
     "https://peerfy-backend.onrender.com/api/v1/comment",
@@ -17,6 +17,7 @@ export const postComment = async (
       locationX,
       locationY,
       createdBy,
+      urlPath: pageUrl,
     },
     { headers }
   );

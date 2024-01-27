@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import useSocket from "./useSocket";
+import { useComments } from "../context/useComments";
 
 const useSocketForComments = (setLatestActivityFromSocket: any) => {
   const [socket] = useSocket("https://peerfy-backend.onrender.com/");
@@ -11,6 +12,7 @@ const useSocketForComments = (setLatestActivityFromSocket: any) => {
     console.log("socket run");
 
     socket?.current.on("connect", () => {
+      // socket.current.join()
       console.log(
         "%cJOINED SOCKET FOR Comments",
         "background: #00ddd0; color: #000; font-weight: 600;"
@@ -25,6 +27,7 @@ const useSocketForComments = (setLatestActivityFromSocket: any) => {
     });
 
     socket.current.on("new-comment", (value) => {
+      console.log(value);
       setLatestActivityFromSocket(value.comment);
     });
   };

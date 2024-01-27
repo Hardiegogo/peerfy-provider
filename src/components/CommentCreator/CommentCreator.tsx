@@ -6,6 +6,7 @@ import { useComments } from "../../context/useComments";
 
 const CommentCreator = () => {
   const { apiKey } = useComments();
+
   const [isInputVisible, setInputVisible] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
@@ -22,27 +23,27 @@ const CommentCreator = () => {
 
   const handlePageClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("shivank", e);
+    console.log("event", e);
     setCoordinates({ x: e.pageX, y: e.pageY });
     showContextMenu(e.pageX, e.pageY);
     console.log("click");
   };
 
   const handleContextMenuOption = () => {
-    // Implement logic based on the selected context menu option
-    // For now, let's just add a comment with the option name
     hideContextMenu();
     setInputVisible(true);
   };
 
   const handleCommentCreate = () => {
+    const fullWidth = document.documentElement.clientWidth;
+    const fullHeight = document.documentElement.clientHeight;
     postComment(
       commentContent,
-      `${coordinates.x}px`,
-      `${coordinates.y}px`,
+      `${coordinates.x / fullWidth}`,
+      `${coordinates.y / fullHeight}`,
       "User123",
       apiKey,
-      window.location.href
+      window.location.origin + window.location.pathname
     );
     console.log(commentContent);
     setCommentContent("");
@@ -57,13 +58,13 @@ const CommentCreator = () => {
       }}
       className="absolute w-full h-full"
       onContextMenu={handlePageClick}
-      style={{
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        cursor: "pointer",
-        zIndex: 9,
-      }}
+      // style={{
+      //   position: "absolute",
+      //   width: "100%",
+      //   height: "100%",
+      //   cursor: "pointer",
+      //   zIndex: 9,
+      // }}
     >
       {isInputVisible && (
         <div

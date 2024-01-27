@@ -1,9 +1,8 @@
 import axios from "axios";
 
-export const fetchComments = async (apiKey: string, page: string = "/") => {
+export const fetchComments = async (apiKey: string) => {
   const headers = {
     apiKey,
-    page,
   };
 
   const res = await axios.get(
