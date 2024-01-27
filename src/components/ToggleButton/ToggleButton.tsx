@@ -10,7 +10,7 @@ const ToggleButton = ({
   setIsChecked,
 }: IToggleProps): JSX.Element => {
   return (
-    <div className=" w-fit rounded-lg overflow-hidden absolute right-4 top-[40%] text-white z-10">
+    <div className=" w-fit rounded-lg overflow-hidden absolute right-4 top-[40%] text-white z-20">
       <div
         onClick={() => setIsChecked(true)}
         className={`bg-black cursor-pointer p-2  hover:bg-opacity-80 text-sm ${
