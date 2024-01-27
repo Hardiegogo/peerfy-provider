@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { Socket } from "socket.io-client";
 
 const useSocket = (URL: string, path?: string) => {
-  const socket = useRef<React.MutableRefObject<Socket<DefaultEventsMap, DefaultEventsMap> | undefined>>();
+  const socket = useRef<Socket | undefined>();
 
   useEffect(() => {
     getSocket();

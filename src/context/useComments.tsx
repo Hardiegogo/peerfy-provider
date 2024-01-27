@@ -32,10 +32,8 @@ export const CommentsProvider = ({
 }) => {
   const [comments, setComments] = useState<IComment[] | undefined>();
   const [latestActivityFromSocket, setLatestActivityFromSocket] = useState();
-  const [socket] = useSocketForComments(setLatestActivityFromSocket);
+  const [socket] = useSocketForComments(setLatestActivityFromSocket, apiKey);
   const [isChecked, setIsChecked] = useState(false);
-
-  const [hoveredCommentId, setHoveredCommentId] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {

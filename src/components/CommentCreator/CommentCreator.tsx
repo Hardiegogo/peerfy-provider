@@ -6,7 +6,6 @@ import { useComments } from "../../context/useComments";
 
 const CommentCreator = () => {
   const { apiKey } = useComments();
-
   const [isInputVisible, setInputVisible] = useState(false);
   const [commentContent, setCommentContent] = useState("");
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
